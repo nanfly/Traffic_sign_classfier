@@ -1,5 +1,5 @@
 
-#**Traffic Sign Recognition Project Report** 
+# **Traffic Sign Recognition Project Report** 
 
 ---
 
@@ -16,28 +16,16 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
-
-## Rubric Points
-###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
+[image1]: ./figures/image_01.png "Data set numbers for each traffic sign"
+[image2]: ./figures/image_02.png "Samples for each traffic sign"
+[image3]: ./figures/image_03.png "Validation accuracy evolution"
+[image4]: ./figures/image_04.png "1" 
+[image5]: ./figures/image_05.png "5" 
 
 ---
-###Writeup / README
+### Data Set Summary & Exploration
 
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. 
-
-The project code is included in the zip file.
-
-###Data Set Summary & Exploration
-
-####1. Provide a basic summary of the data set and identify where in your code the summary was done. 
+#### 1. Provide a basic summary of the data set and identify where in your code the summary was done. 
 
 The code for this step is contained in the code cell #1 and #2 of the IPython notebook.  
 
@@ -51,26 +39,26 @@ signs data set:
 
 I also use the csv library to read in the signnames.csv and store the names in a np.array.
 
-####2. Include an exploratory visualization of the dataset and identify where the code is in your code file.
+#### 2. Include an exploratory visualization of the dataset and identify where the code is in your code file.
 
 The code for this step is contained in the code cell #3 of the IPython notebook.  
 
 Here is an exploratory visualization of the data set. It is a bar chart showing how many data sets are included in the training data for each traffic sign.
-![Data set numbers for each traffic sign](files/image_01.png)
+![Data set numbers for each traffic sign][image1]
 
 I also plot a sample of each traffic sign and attach a number on it (representing the frequency in the training set).
-![Samples for each traffic sign](files/image_02.png)
+![Samples for each traffic sign][image2]
 
-###Design and Test a Model Architecture
+### Design and Test a Model Architecture
 
-####1. Describe how, and identify where in your code, you preprocessed the image data. 
+#### 1. Describe how, and identify where in your code, you preprocessed the image data. 
 
 The code for this step is contained in the code cell #4 of the IPython notebook.
 
 I define a function rgb2gray_norm to do the rgb to gray scale change as gray = 0.299*r + 0.587*g + 0.144*b.
 And then do a normalization to make the values be between [-0.5,0.5]. The main reason for the normalization is to reduce the numerical error during the optimization process. In addition, keeping the inputs in normalized shapes help the optimizer to find the minimum cost faster.
 
-####2. Describe how, and identify where in your code, you set up training, validation and testing data.
+#### 2. Describe how, and identify where in your code, you set up training, validation and testing data.
 
 The code for splitting the data into training and validation sets is contained in the fifth code cell of the IPython notebook.  
 
@@ -79,14 +67,14 @@ To cross validate my model, I randomly split the training data into a training s
 My final training set had 27446 number of images. My validation set and test set had 11763 and 12630 number of images.
 
 
-####3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) 
+#### 3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) 
 
 The code for my final model is located in the sixth cell of the ipython notebook. 
 
 The architecture used in the final script is a standard LeNet + one drop out layer between the conv layer and the fully connected layer.
 
 
-####4. Describe how, and identify where in your code, you trained your model. 
+#### 4. Describe how, and identify where in your code, you trained your model. 
 
 The code for training the model is located in the seventh cell of the ipython notebook. 
 
@@ -113,9 +101,9 @@ My model is based on the LeNet architecture and I add in an additional drop out 
 
 
 During the model training, I use a np.array to record the validation accuracy evolution and plot it after the training is finished. A example is shown as follow.
-![Validation accuracy evolution](files/image_03.png)
+![Validation accuracy evolution][image3]
 
-####5. Describe the approach taken for finding a solution. 
+#### 5. Describe the approach taken for finding a solution. 
 
 The code for calculating the accuracy of the model is located in the cell #8 of the Ipython notebook.
 
@@ -151,19 +139,19 @@ In terms of the learning rate, there is also no significant difference. The mode
 What confused me is that the test set accuracy is significantly lower than the validation accuracy. Which I assume is due to the difference between the train data set and the test data set.
 
 
-###Test a Model on New Images
+### Test a Model on New Images
 
-####1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
+#### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
 Here are six German traffic signs that I found on the web. In cell #9 and #10, I load the images and perform rgb2gray and normalization on these images and also transform them to 32X32.
 
 The first five images contain single sign while the sixth image contains two signs in one picture. So the final image will be difficult to classify because it has two signs, I am interested to see that what probabilities the classifier will assign to this image.
 
-![1](files/image_04.png)
+![1][image4]
 
 
 
-####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. Identify where in your code predictions were made. 
+#### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. Identify where in your code predictions were made. 
 
 The code for making predictions on my final model is located in the cell #11 of the Ipython notebook.
 
@@ -181,13 +169,13 @@ Here are the results of the prediction:
 
 The model was able to correctly guess 5 of the first 5 traffic signs, which gives an accuracy of 100%. Consider that the test accuracy of the model is 94.7%, I believe this 100% accuracy on the acquired images is appropriate.
 
-####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction and identify where in your code softmax probabilities were outputted. 
+#### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction and identify where in your code softmax probabilities were outputted. 
 
 The code for making predictions on my final model is located in the 13th cell of the Ipython notebook.
 
 I plot bar charts as visualizations of the predication certainties. 
 
-![05](files/image_05.png)
+![05][image5]
 
 For the first image (50 km/h speed limit), the model is very sure that this is a 50km/h speed limit (probability of 98.1%). And the second guess is a 30 km/h speed limit (only 1.9%), I think this is due to the similarity between speed limit signs. The top five soft max probabilities were
 
